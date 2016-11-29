@@ -21,7 +21,6 @@ def mainmenu():
     if choice_me == 1:
         singleplayer()
     elif choice_me == 2:
-        print('Two player ')
         twoplayer()
     elif choice_me == 3:
         instructions()
@@ -72,10 +71,12 @@ def singleplayer():
     numberofgames = int(numberofgames)
     print("Please choose rock , paper , scissors , lizard, or spock\n")
     choice_sp = input("What do you choose?\n")
+    choices_cpu= ['rock', 'spock', 'paper', 'lizard', 'scissors']
+    choices_cpu = random.choice(choices_cpu)
     # Convert string to type
     player_choice = str(choice_sp)
+    computer_choice = choices_cpu
 
-    # Converts name to number
     def name_to_number(name):
         if name == "rock":
             name = 0
@@ -93,30 +94,17 @@ def singleplayer():
             name = 4
             return name
 
-    # Converts number to name in order to random the computer choice of "weapon"
     def number_to_name(number):
-        if number == 0:
-            number = "rock"
-            return number
-        elif number == 1:
-            number = "spock"
-            return number
-        elif number == 2:
-            number = "paper"
-            return number
-        elif number == 3:
-            number = "lizard"
-            return number
-        elif number == 4:
-            number = "scissors"
-            return number
+        choices = ['rock', 'spock', 'paper', 'lizard', 'scissors']
+        choices = random.choice(choices)
+        print(choices)
 
     try:
-        computer_choice = random.randrange(5)
+        computer_number = name_to_number(computer_choice)
         player_number = name_to_number(player_choice)
         print("\nPlayer choice is: " + player_choice)
-        print("Computer choice is: " + number_to_name(computer_choice))
-        difference = (int(player_number) - computer_choice) % 5
+        print("Computer choice is: " + computer_choice)
+        difference = (int(player_number) - computer_number) % 5
         draws = 0
         playerwins = 0
         computerwins = 0
@@ -146,53 +134,37 @@ def singleplayer():
 
 def twoplayer():
     print('Two Player Game')
-    numberofgames = input("How many games do you want to play?\n")
-    print("Please choose rock , paper , scissors , lizard, or spock\n")
+    numberofgames = input('How many games do you want to play?\n')
+    print('Please choose rock , paper , scissors , lizard, or spock\n')
     choice_p1 = input("What do you choose?\n")
     # Convert string to type
     player1_choice = str(choice_p1)
-    choice_p2 = input("What do you choose?\n")
+    choice_p2 = input('What do you choose?\n')
+    # Convert string to type
     player2_choice = str(choice_p2)
-
+    #
     def name_to_number(name):
-        if name == "rock":
+        if name == 'Rock' or 'rock':
             name = 0
             return name
-        elif name == "spock":
+        elif name == 'Spock' or 'spock':
             name = 1
             return name
-        elif name == "paper":
+        elif name == 'Paper' or 'paper':
             name = 2
             return name
-        elif name == "lizard":
+        elif name == 'Lizard' or 'lizard':
             name = 3
             return name
-        elif name == "scissors":
+        elif name == 'Scissors' or 'scissors':
             name = 4
             return name
 
-    def number_to_name(number):
-        if number == 0:
-            number = "rock"
-            return number
-        elif number == 1:
-            number = "spock"
-            return number
-        elif number == 2:
-            number = "paper"
-            return number
-        elif number == 3:
-            number = "lizard"
-            return number
-        elif number == 4:
-            number = "scissors"
-            return number
-
     try:
         player1_number = name_to_number(player1_choice)
-        print("Player 1 choice is: " + player1_choice)
+        print('Player 1 choice is: ' + player1_choice)
         player2_number = name_to_number(player2_choice)
-        print("Player 2 choice is: " + player2_choice)
+        print('Player 2 choice is: ' + player2_choice)
         difference = (int(player1_number) - player2_number) % 5
         draws = 0
         player1wins = 0
@@ -208,7 +180,6 @@ def twoplayer():
             player2wins = player2wins + 1
 
         print("Wins: " + str(player1wins) + "\n" + "Draws: " + str(draws) + "\n" + "Losses " + str(player2wins))
-        wins_total += player1wins + draws + player2wins
         while player1wins + draws + player2wins <= numberofgames:
             twoplayer()
 
