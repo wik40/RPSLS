@@ -1,0 +1,220 @@
+# Rock, paper, scissors, lizard, Spock
+
+import sys
+import random
+
+def mainmenu():
+    print(64 * '_')
+    print('\n', 3 * '*','Welcome to the Rock, paper, scissor, lizard, spock game', 3 * '*')
+    print(64 * '_', '\n')
+    print('1) New Single Player Game')
+    print('2) New Two Player Game')
+    print('3) Instructions')
+    print('4) Bonus')
+    print('5) Quit')
+    print(30 * '_')
+    # Enter a number to start the different options
+    choice_me = input('Choose your option[1-5]s:')
+    # Convert string to type
+    choice_me = int(choice_me)
+    # choose the between the menu options
+    if choice_me == 1:
+        singleplayer()
+    elif choice_me == 2:
+        print('Two player ')
+        twoplayer()
+    elif choice_me == 3:
+        instructions()
+    elif choice_me == 4:
+        bonus()
+    elif choice_me == 5:
+        sys.exit()
+    # If you're not entering correct number between 1-5 dis error appears
+    else:
+        print('invalid choice. Enter 1-5')
+        mainmenu()
+
+    # Main routine
+    mainmenu()
+
+
+# Instructions for the game, defined as instructions
+def instructions():
+    print('Pick one of the following weapons, Rock, paper, scissor, lizard, spock. '
+          '\nWhoever has the strongest weapon will win,'
+          'If you pick the same weapon it will be a draw')
+    print(30 * '-')
+    print('What beats what:\n')
+    print('Scissors cuts Paper '
+          '\nPaper covers Rock '
+          '\nRock crushes Lizard '
+          '\nLizard poisons Spock '
+          '\nSpock smashes or melts Scissors '
+          '\nScissors decapitates Lizard '
+          '\nLizard eats Paper '
+          '\nPaper disproves Spock '
+          '\nSpock vaporizes Rock '
+          '\nRock crushes Scissors\n')
+
+    print(input('\nPress any key to return to the Main Menu...'))
+    mainmenu()
+
+
+def bonus():
+    print('Bonus Material\n')
+    print(30 * '-')
+    print(input('\nPress any key to go back to Main Menu...'))
+
+
+# Defining the single player game
+def singleplayer():
+    numberofgames = input("How many games do you want to play?\n")
+    numberofgames = int(numberofgames)
+    print("Please choose rock , paper , scissors , lizard, or spock\n")
+    choice_sp = input("What do you choose?\n")
+    # Convert string to type
+    player_choice = str(choice_sp)
+
+    # Converts name to number
+    def name_to_number(name):
+        if name == "rock":
+            name = 0
+            return name
+        elif name == "spock":
+            name = 1
+            return name
+        elif name == "paper":
+            name = 2
+            return name
+        elif name == "lizard":
+            name = 3
+            return name
+        elif name == "scissors":
+            name = 4
+            return name
+
+    # Converts number to name in order to random the computer choice of "weapon"
+    def number_to_name(number):
+        if number == 0:
+            number = "rock"
+            return number
+        elif number == 1:
+            number = "spock"
+            return number
+        elif number == 2:
+            number = "paper"
+            return number
+        elif number == 3:
+            number = "lizard"
+            return number
+        elif number == 4:
+            number = "scissors"
+            return number
+
+    try:
+        computer_choice = random.randrange(5)
+        player_number = name_to_number(player_choice)
+        print("\nPlayer choice is: " + player_choice)
+        print("Computer choice is: " + number_to_name(computer_choice))
+        difference = (int(player_number) - computer_choice) % 5
+        draws = 0
+        playerwins = 0
+        computerwins = 0
+        if difference in [1, 2]:
+            print("\nPlayer wins!")
+            playerwins += 1
+        elif difference == 0:
+            print("\nPlayer and computer tie!")
+            draws += 1
+        else:
+            print("\nComputer wins!")
+            computerwins += 1
+
+        print("Wins:  " + str(playerwins) + "\n" + "Draws: " + str(draws) + "\n" + "Losses:" + str(computerwins))
+
+        wins_total = playerwins + draws + computerwins
+        wins_total = int(wins_total)
+        print('Total games played:', wins_total)
+        while playerwins + draws + computerwins <= numberofgames:
+            singleplayer()
+
+    except TypeError:
+        print("\nSorry, wrong input, please read the instructions")
+        print(input('Please try again...'))
+    singleplayer()
+
+
+def twoplayer():
+    print('Two Player Game')
+    numberofgames = input("How many games do you want to play?\n")
+    print("Please choose rock , paper , scissors , lizard, or spock\n")
+    choice_p1 = input("What do you choose?\n")
+    # Convert string to type
+    player1_choice = str(choice_p1)
+    choice_p2 = input("What do you choose?\n")
+    player2_choice = str(choice_p2)
+
+    def name_to_number(name):
+        if name == "rock":
+            name = 0
+            return name
+        elif name == "spock":
+            name = 1
+            return name
+        elif name == "paper":
+            name = 2
+            return name
+        elif name == "lizard":
+            name = 3
+            return name
+        elif name == "scissors":
+            name = 4
+            return name
+
+    def number_to_name(number):
+        if number == 0:
+            number = "rock"
+            return number
+        elif number == 1:
+            number = "spock"
+            return number
+        elif number == 2:
+            number = "paper"
+            return number
+        elif number == 3:
+            number = "lizard"
+            return number
+        elif number == 4:
+            number = "scissors"
+            return number
+
+    try:
+        player1_number = name_to_number(player1_choice)
+        print("Player 1 choice is: " + player1_choice)
+        player2_number = name_to_number(player2_choice)
+        print("Player 2 choice is: " + player2_choice)
+        difference = (int(player1_number) - player2_number) % 5
+        draws = 0
+        player1wins = 0
+        player2wins = 0
+        if difference in [1, 2]:
+            print("Player 1 wins!")
+            player1wins = player1wins + 1
+        elif difference == 0:
+            print("Player 1 and player 2 tie!")
+            draws = draws + 1
+        else:
+            print("Player 2 wins!")
+            player2wins = player2wins + 1
+
+        print("Wins: " + str(player1wins) + "\n" + "Draws: " + str(draws) + "\n" + "Losses " + str(player2wins))
+        wins_total += player1wins + draws + player2wins
+        while player1wins + draws + player2wins <= numberofgames:
+            twoplayer()
+
+    except TypeError:
+        print("Sorry, please read the directions and type rock, paper, scissors, spock, or lizard in lowercase.")
+        twoplayer()
+
+
+mainmenu()
