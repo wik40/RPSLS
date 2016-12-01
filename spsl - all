@@ -3,9 +3,10 @@
 import sys
 import random
 
+
 def mainmenu():
     print(64 * '_')
-    print('\n', 3 * '*','Welcome to the Rock, paper, scissor, lizard, spock game', 3 * '*')
+    print('\n', 3 * '*', 'Welcome to the Rock, paper, scissor, lizard, spock game', 3 * '*')
     print(64 * '_', '\n')
     print('1) New Single Player Game')
     print('2) New Two Player Game')
@@ -28,7 +29,7 @@ def mainmenu():
         bonus()
     elif choice_me == 5:
         sys.exit()
-    # If you're not entering correct number between 1-5 dis error appears
+    # If you're not entering correct number between 1-5 this error appears
     else:
         print('invalid choice. Enter 1-5')
 
@@ -58,6 +59,19 @@ def bonus():
     print(30 * '-')
     print(input('\nPress any key to go back to Main Menu...'))
 
+def name_to_number(name):
+    if name == "rock" or name == 'Rock' or name == 0:
+        name = 0
+    elif name == 'spock' or name == 'Spock' or name == 1:
+        name = 1
+    elif name == 'paper' or name == 'Paper' or name == 2:
+        name = 2
+    elif name == 'lizard' or name == 'Lizard' or name == 3:
+        name = 3
+    elif name == "scissors" or name == 'Scissors' or name == 4:
+        name = 4
+    return name
+
 
 # Defining the single player game
 def singleplayer():
@@ -65,24 +79,12 @@ def singleplayer():
     numberofgames = int(numberofgames)
     print("Please choose rock , paper , scissors , lizard, or spock\n")
     choice_sp = input("What do you choose?\n")
-    choices_cpu= ['rock', 'spock', 'paper', 'lizard', 'scissors']
+    # list of what the computer will random
+    choices_cpu = ['rock', 'spock', 'paper', 'lizard', 'scissors']
     choices_cpu = random.choice(choices_cpu)
     # Convert string to type
     player_choice = str(choice_sp)
     computer_choice = choices_cpu
-
-    def name_to_number(name):
-        if name == "rock" or name == 'Rock' or name == 0:
-            name = 0
-        elif name == 'spock' or name == 'Spock' or name == 1:
-            name = 1
-        elif name == 'paper' or name == 'Paper' or name == 2:
-            name = 2
-        elif name == 'lizard' or name == 'Lizard' or name == 3:
-            name = 3
-        elif name == "scissors" or name == 'Scissors' or name == 4:
-            name = 4
-        return name
 
     try:
         computer_number = name_to_number(computer_choice)
@@ -114,10 +116,11 @@ def singleplayer():
         print('\nSorry, wrong input, please read the instructions')
         print(input('Please try again...'))
 
+
 def twoplayer():
     print('Two Player Game')
     numberofgames = input('How many games do you want to play?\n')
-    print('Please choose rock , paper , scissors , lizard, or spock\n')
+    print('\nPlease choose rock , paper , scissors , lizard, or spock\n')
     choice_p1 = input('What do you choose?\n')
     # Convert string to type
     player1_choice = str(choice_p1)
@@ -125,18 +128,6 @@ def twoplayer():
     # Convert string to type
     player2_choice = str(choice_p2)
 
-    def name_to_number(name):
-        if name == "rock" or name == 'Rock' or name == 0:
-            name = 0
-        elif name == 'spock' or name == 'Spock' or name == 1:
-            name = 1
-        elif name == 'paper' or name == 'Paper' or name == 2:
-            name = 2
-        elif name == 'lizard' or name == 'Lizard' or name == 3:
-            name = 3
-        elif name == "scissors" or name == 'Scissors' or name == 4:
-            name = 4
-        return name
     try:
         player1_number = name_to_number(player1_choice)
         print('Player 1 choice is: ' + player1_choice)
@@ -156,7 +147,7 @@ def twoplayer():
             print('Player 2 wins!')
             player2wins = player2wins + 1
 
-        print('Wins: ' + str(player1wins) + '\n' + 'Draws: ' + str(draws) + '\n' + 'Losses:'  + str(player2wins))
+        print('Wins: ' + str(player1wins) + '\n' + 'Draws: ' + str(draws) + '\n' + 'Losses:' + str(player2wins))
 
         choice = input('Do you want to continue playing? yes/no: ')
         if (choice == 'yes' or choice == 'y' or choice == 'Yes'):
@@ -164,10 +155,8 @@ def twoplayer():
         elif (choice == 'no' or choice == 'n' or choice == 'No'):
             return mainmenu()
 
-
     except TypeError:
         print('Sorry, please read the instructions and try again...')
-        twoplayer()
 
 
 mainmenu()
