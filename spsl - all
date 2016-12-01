@@ -31,10 +31,6 @@ def mainmenu():
     # If you're not entering correct number between 1-5 dis error appears
     else:
         print('invalid choice. Enter 1-5')
-        mainmenu()
-
-    # Main routine
-    mainmenu()
 
 
 # Instructions for the game, defined as instructions
@@ -43,8 +39,8 @@ def instructions():
           '\nWhoever has the strongest weapon will win,'
           'If you pick the same weapon it will be a draw')
     print(30 * '-')
-    print('What beats what:\n')
-    print('Scissors cuts Paper '
+    print('What beats what:\n'
+          '\nScissors cuts Paper '
           '\nPaper covers Rock '
           '\nRock crushes Lizard '
           '\nLizard poisons Spock '
@@ -54,9 +50,7 @@ def instructions():
           '\nPaper disproves Spock '
           '\nSpock vaporizes Rock '
           '\nRock crushes Scissors\n')
-
     print(input('\nPress any key to return to the Main Menu...'))
-    mainmenu()
 
 
 def bonus():
@@ -78,88 +72,71 @@ def singleplayer():
     computer_choice = choices_cpu
 
     def name_to_number(name):
-        if name == "rock":
+        if name == "rock" or name == 'Rock' or name == 0:
             name = 0
-            return name
-        elif name == "spock":
+        elif name == 'spock' or name == 'Spock' or name == 1:
             name = 1
-            return name
-        elif name == "paper":
+        elif name == 'paper' or name == 'Paper' or name == 2:
             name = 2
-            return name
-        elif name == "lizard":
+        elif name == 'lizard' or name == 'Lizard' or name == 3:
             name = 3
-            return name
-        elif name == "scissors":
+        elif name == "scissors" or name == 'Scissors' or name == 4:
             name = 4
-            return name
-
-    def number_to_name(number):
-        choices = ['rock', 'spock', 'paper', 'lizard', 'scissors']
-        choices = random.choice(choices)
-        print(choices)
+        return name
 
     try:
         computer_number = name_to_number(computer_choice)
         player_number = name_to_number(player_choice)
-        print("\nPlayer choice is: " + player_choice)
-        print("Computer choice is: " + computer_choice)
+        print('\nPlayer choice is: ' + player_choice)
+        print('Computer choice is: ' + computer_choice)
         difference = (int(player_number) - computer_number) % 5
         draws = 0
         playerwins = 0
         computerwins = 0
         if difference in [1, 2]:
-            print("\nPlayer wins!")
+            print('\nPlayer wins!')
             playerwins += 1
         elif difference == 0:
-            print("\nPlayer and computer tie!")
+            print('\nPlayer and computer draw!')
             draws += 1
         else:
-            print("\nComputer wins!")
+            print('\nComputer wins!')
             computerwins += 1
 
-        print("Wins:  " + str(playerwins) + "\n" + "Draws: " + str(draws) + "\n" + "Losses:" + str(computerwins))
-
-        wins_total = playerwins + draws + computerwins
-        wins_total = int(wins_total)
-        print('Total games played:', wins_total)
-        while playerwins + draws + computerwins <= numberofgames:
-            singleplayer()
+        print('Wins:  ' + str(playerwins) + '\n' + 'Draws: ' + str(draws) + '\n' + 'Losses:' + str(computerwins))
+        choice = input('Do you want to continue playing? yes/no: ')
+        if (choice == 'yes' or choice == 'y' or choice == 'Yes'):
+            return singleplayer()
+        elif (choice == 'no' or choice == 'n' or choice == 'No'):
+            return mainmenu()
 
     except TypeError:
-        print("\nSorry, wrong input, please read the instructions")
+        print('\nSorry, wrong input, please read the instructions')
         print(input('Please try again...'))
-    singleplayer()
-
 
 def twoplayer():
     print('Two Player Game')
     numberofgames = input('How many games do you want to play?\n')
     print('Please choose rock , paper , scissors , lizard, or spock\n')
-    choice_p1 = input("What do you choose?\n")
+    choice_p1 = input('What do you choose?\n')
     # Convert string to type
     player1_choice = str(choice_p1)
     choice_p2 = input('What do you choose?\n')
     # Convert string to type
     player2_choice = str(choice_p2)
-    #
-    def name_to_number(name):
-        if name == 'Rock' or 'rock':
-            name = 0
-            return name
-        elif name == 'Spock' or 'spock':
-            name = 1
-            return name
-        elif name == 'Paper' or 'paper':
-            name = 2
-            return name
-        elif name == 'Lizard' or 'lizard':
-            name = 3
-            return name
-        elif name == 'Scissors' or 'scissors':
-            name = 4
-            return name
 
+    def name_to_number(name):
+        if name == "rock" or name == 'Rock' or name == 0:
+            name = 0
+        elif name == 'spock' or name == 'Spock' or name == 1:
+            name = 1
+        elif name == 'paper' or name == 'Paper' or name == 2:
+            name = 2
+        elif name == 'lizard' or name == 'Lizard' or name == 3:
+            name = 3
+        elif name == "scissors" or name == 'Scissors' or name == 4:
+            name = 4
+        return name
     try:
         player1_number = name_to_number(player1_choice)
         print('Player 1 choice is: ' + player1_choice)
@@ -170,21 +147,26 @@ def twoplayer():
         player1wins = 0
         player2wins = 0
         if difference in [1, 2]:
-            print("Player 1 wins!")
+            print('Player 1 wins!')
             player1wins = player1wins + 1
         elif difference == 0:
-            print("Player 1 and player 2 tie!")
+            print('Player 1 and player 2 draw!')
             draws = draws + 1
         else:
-            print("Player 2 wins!")
+            print('Player 2 wins!')
             player2wins = player2wins + 1
 
-        print("Wins: " + str(player1wins) + "\n" + "Draws: " + str(draws) + "\n" + "Losses " + str(player2wins))
-        while player1wins + draws + player2wins <= numberofgames:
-            twoplayer()
+        print('Wins: ' + str(player1wins) + '\n' + 'Draws: ' + str(draws) + '\n' + 'Losses:'  + str(player2wins))
+
+        choice = input('Do you want to continue playing? yes/no: ')
+        if (choice == 'yes' or choice == 'y' or choice == 'Yes'):
+            return twoplayer()
+        elif (choice == 'no' or choice == 'n' or choice == 'No'):
+            return mainmenu()
+
 
     except TypeError:
-        print("Sorry, please read the directions and type rock, paper, scissors, spock, or lizard in lowercase.")
+        print('Sorry, please read the instructions and try again...')
         twoplayer()
 
 
